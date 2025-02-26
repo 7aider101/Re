@@ -1,0 +1,137 @@
+/* إعدادات أساسية للخط واتجاه النص */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  direction: rtl;
+  font-family: "Tajawal", sans-serif;
+  background: linear-gradient(to bottom right, #f3f3f3, #ffffff);
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ترويسة الصفحة */
+header {
+  background: linear-gradient(to right, #444, #666);
+  color: #fff;
+  text-align: center;
+  padding: 40px 20px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: "";
+  background: url('https://via.placeholder.com/1200x400/333/fff?text=Restaurant+Background') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; 
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: 0;
+}
+
+header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  z-index: 1;
+  position: relative;
+}
+
+header p {
+  font-size: 1rem;
+  margin-bottom: 0;
+  opacity: 0.9;
+  z-index: 1;
+  position: relative;
+}
+
+/* حاوية المحتوى الأساسي */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto 50px auto;
+  position: relative;
+}
+
+.note {
+  text-align: center;
+  margin: 0 auto 30px auto;
+  color: #666;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* عناوين الأقسام */
+.category {
+  margin-bottom: 40px;
+}
+
+.category h2 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  display: inline-block;
+  padding-bottom: 5px;
+  border-bottom: 3px solid #444;
+  color: #444;
+  position: relative;
+}
+
+.category h2 i {
+  margin-left: 8px;
+  color: #e74c3c;
+}
+
+/* شبكة عرض العناصر */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.menu-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: box-shadow 0.2s ease;
+  position: relative;
+}
+
+.menu-item:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.item-name {
+  font-weight: bold;
+  font-size: 1.05rem;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.item-price {
+  color: #666;
+  font-size: 0.95rem;
+  margin-top: auto;
+}
+
+/* فوتر الصفحة */
+footer {
+  text-align: center;
+  background-color: #444;
+  color: #fff;
+  padding: 15px 20px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  footer {
+    position: static;
+  }
+}
