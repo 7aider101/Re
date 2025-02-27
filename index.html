@@ -12,80 +12,106 @@
     referrerpolicy="no-referrer"
   />
   <style>
-    /* إعدادات أساسية للخط واتجاه النص */
+    /* تأثير التنقل السلس */
+    html {
+      scroll-behavior: smooth;
+    }
+    /* إعدادات أساسية */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
     body {
-      direction: rtl; /* المحتوى باللغة العربية */
-      font-family: "Tajawal", sans-serif; /* أو أي خط تفضله */
+      direction: rtl;
+      font-family: "Tajawal", sans-serif;
       background: linear-gradient(to bottom right, #f3f3f3, #ffffff);
       color: #333;
       line-height: 1.6;
     }
-
-    /* ترويسة الصفحة */
+    /* الترويسة مع الخلفية واللوجو وشريط التنقل */
     header {
       background: linear-gradient(to right, #444, #666);
       color: #fff;
       text-align: center;
-      padding: 40px 20px;
-      margin-bottom: 20px;
+      padding: 20px;
       position: relative;
       overflow: hidden;
     }
-
-    /* خلفية صورة شفافة في الهيدر (اختياري) */
     header::before {
       content: "";
       background: url('https://via.placeholder.com/1200x400/333/fff?text=Restaurant+Background') no-repeat center center;
       background-size: cover;
-      opacity: 0.2; 
+      opacity: 0.2;
       position: absolute;
-      top: 0; right: 0; bottom: 0; left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
       z-index: 0;
     }
-
+    .header-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .logo {
+      width: 80px;
+      height: auto;
+      margin-bottom: 10px;
+    }
     header h1 {
       font-size: 2.2rem;
       margin-bottom: 10px;
-      z-index: 1; /* لجعل النص فوق صورة الخلفية */
-      position: relative;
     }
-
     header p {
       font-size: 1rem;
-      margin-bottom: 0;
       opacity: 0.9;
-      z-index: 1;
-      position: relative;
+      margin-bottom: 15px;
     }
-
-    /* حاوية المحتوى الأساسي */
+    nav {
+      margin-top: 10px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 0;
+    }
+    nav ul li {
+      margin: 0;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 12px;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+    nav ul li a:hover {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    /* تنسيق المحتوى الرئيسي */
     .container {
       width: 90%;
       max-width: 1200px;
       margin: 0 auto 50px auto;
-      position: relative;
     }
-
-    /* نص اعتذار أو ملاحظة */
     .note {
       text-align: center;
-      margin: 0 auto 30px auto;
+      margin: 20px auto;
       color: #666;
       font-size: 0.95rem;
-      opacity: 0.9;
     }
-
-    /* عناوين الأقسام */
+    /* أقسام القائمة */
     .category {
       margin-bottom: 40px;
     }
-
     .category h2 {
       font-size: 1.4rem;
       margin-bottom: 15px;
@@ -93,21 +119,17 @@
       padding-bottom: 5px;
       border-bottom: 3px solid #444;
       color: #444;
-      position: relative;
     }
-
     .category h2 i {
       margin-left: 8px;
-      color: #e74c3c; /* لون أيقونة */
+      color: #e74c3c;
     }
-
     /* شبكة عرض العناصر */
     .menu-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 15px;
     }
-
     .menu-item {
       background-color: #fff;
       border: 1px solid #ddd;
@@ -117,46 +139,34 @@
       flex-direction: column;
       justify-content: space-between;
       transition: box-shadow 0.2s ease;
-      position: relative;
     }
-
     .menu-item:hover {
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-
     .item-name {
       font-weight: bold;
       font-size: 1.05rem;
       margin-bottom: 5px;
-      color: #333;
     }
-
     .item-price {
       color: #666;
       font-size: 0.95rem;
-      margin-top: auto; /* لضمان بقاء السعر في الأسفل */
+      margin-top: auto;
     }
-
-    /* فوتر بسيط */
+    /* تنسيق الفوتر */
     footer {
       text-align: center;
       background-color: #444;
       color: #fff;
       padding: 15px 20px;
       font-size: 0.9rem;
+      line-height: 1.5;
     }
-
-    /* جعل الفوتر ثابتًا بأسفل الصفحة إن أردت (اختياري)
-       ملاحظة: هذا قد يتداخل مع بعض الشاشات الصغيرة */
-    /*
-    footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
+    .footer-extra {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #ccc;
     }
-    */
-
     @media (max-width: 768px) {
       footer {
         position: static;
@@ -165,21 +175,35 @@
   </style>
 </head>
 <body>
-
-  <!-- الترويسة -->
+  <!-- الترويسة مع اللوجو وشريط التنقل -->
   <header>
-    <h1>منيو مطعم وكافيه تيتو</h1>
-    <p>أشهى المأكولات والمشروبات على الإطلاق</p>
+    <div class="header-content">
+      <!-- مكان عرض اللوجو -->
+      <img src="https://via.placeholder.com/80x80.png?text=Logo" alt="Logo" class="logo" />
+      <h1>منيو مطعم وكافيه تيتو</h1>
+      <p>أشهى المأكولات والمشروبات على الإطلاق</p>
+      <!-- شريط التنقل -->
+      <nav>
+        <ul>
+          <li><a href="#hot-dishes"><i class="fas fa-pepper-hot"></i> المأكولات الحارة</a></li>
+          <li><a href="#pastries"><i class="fas fa-birthday-cake"></i> المعجنات والحلويات</a></li>
+          <li><a href="#salads"><i class="fas fa-seedling"></i> السلطات</a></li>
+          <li><a href="#cold-dishes"><i class="fas fa-snowflake"></i> المأكولات الباردة</a></li>
+          <li><a href="#hot-drinks"><i class="fas fa-mug-hot"></i> المشروبات الحارة</a></li>
+          <li><a href="#cold-drinks"><i class="fas fa-wine-glass-alt"></i> المشروبات الباردة</a></li>
+          <li><a href="#cocktails"><i class="fas fa-blender"></i> كوكتيل</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <!-- حاوية المحتوى -->
   <div class="container">
-
-    <!-- ملاحظة أو تنبيه -->
+    <!-- ملاحظة -->
     <p class="note">نأسف لعدم جاهزية النسخة الأصلية حالياً</p>
 
     <!-- قسم المأكولات الحارة -->
-    <div class="category">
+    <div class="category" id="hot-dishes">
       <h2><i class="fas fa-pepper-hot"></i> المأكولات الحارة</h2>
       <div class="menu-grid">
         <div class="menu-item">
@@ -218,7 +242,7 @@
     </div>
 
     <!-- قسم المعجنات والحلويات -->
-    <div class="category">
+    <div class="category" id="pastries">
       <h2><i class="fas fa-birthday-cake"></i> المعجنات والحلويات</h2>
       <div class="menu-grid">
         <div class="menu-item">
@@ -257,7 +281,7 @@
     </div>
 
     <!-- قسم السلطات -->
-    <div class="category">
+    <div class="category" id="salads">
       <h2><i class="fas fa-seedling"></i> السلطات</h2>
       <div class="menu-grid">
         <div class="menu-item">
@@ -272,7 +296,7 @@
     </div>
 
     <!-- قسم المأكولات الباردة -->
-    <div class="category">
+    <div class="category" id="cold-dishes">
       <h2><i class="fas fa-snowflake"></i> المأكولات الباردة</h2>
       <div class="menu-grid">
         <div class="menu-item">
@@ -291,7 +315,7 @@
     </div>
 
     <!-- قسم المشروبات الحارة -->
-    <div class="category">
+    <div class="category" id="hot-drinks">
       <h2><i class="fas fa-mug-hot"></i> المشروبات الحارة</h2>
       <div class="menu-grid">
         <div class="menu-item">
@@ -342,7 +366,7 @@
     </div>
 
     <!-- قسم المشروبات الباردة -->
-    <div class="category">
+    <div class="category" id="cold-drinks">
       <h2><i class="fas fa-wine-glass-alt"></i> المشروبات الباردة</h2>
       <div class="menu-grid">
         <div class="menu-item">
@@ -409,7 +433,7 @@
     </div>
 
     <!-- قسم الكوكتيل -->
-    <div class="category">
+    <div class="category" id="cocktails">
       <h2><i class="fas fa-blender"></i> كوكتيل</h2>
       <div class="menu-grid">
         <div class="menu-item">
@@ -435,12 +459,20 @@
       </div>
     </div>
 
+    <!-- قسم معلومات التواصل والحقوق -->
+    <div class="category" id="contact" style="text-align: center; margin-top: 40px;">
+      <h2><i class="fas fa-address-book"></i> تواصل معنا</h2>
+      <p>للتواصل مع المنشى: <strong>example@example.com</strong> - هاتف: <strong>+964 123 4567</strong></p>
+      <p class="footer-extra">تصميم وبرمجة: ChatGPT - جميع الحقوق محفوظة.</p>
+    </div>
+
   </div>
   
-  <!-- فوتر الصفحة -->
   <footer>
     © 2025 مطعم وكافيه تيتو. جميع الحقوق محفوظة.
+    <div class="footer-extra">
+      للتواصل: example@example.com - هاتف: +964 123 4567 | تصميم وبرمجة: ChatGPT
+    </div>
   </footer>
-
 </body>
-  </html>
+</html>
